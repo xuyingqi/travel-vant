@@ -22,13 +22,6 @@
 <script type="text/ecmascript-6">
 
   export default {
-    data() {
-      return {
-        swiperOption: {
-          loop: false
-        }
-      }
-    },
     props: {
       iconList: {
         type: Array

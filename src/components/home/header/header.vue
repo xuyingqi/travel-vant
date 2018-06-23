@@ -3,13 +3,14 @@
     <!--<van-icon name="arrow-left"/>-->
     <van-search placeholder="输入城市、景点、游玩主体" background="transparent"/>
     <router-link to="./city">
-      <div class="header-right">{{this.city}}<span class="icon-arrow_bottom"></span></div>
+      <!--<div class="header-right">{{this.$store.state.city}}<span class="icon-arrow_bottom"></span></div>-->
+      <div class="header-right">{{city}}<span class="icon-arrow_bottom"></span></div>
     </router-link>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import {mapState} from 'vuex'
+  import { mapState } from 'vuex'
   export default {
     computed: {
       ...mapState(['city'])
@@ -19,8 +20,11 @@
 
 <style lang="stylus" scoped>
   @import "~common/styles/varibles.styl"
-  .van-search >>> .van-cell
+  .
+  van-search > > >
+  .van-cell
     padding-left: 50px
+
   .header
     display: flex
     background: $bgColor

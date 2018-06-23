@@ -4,7 +4,7 @@
         v-for="item in letters"
         :key="item"
         :ref="item"
-        @click="handleLetterClick"
+        @click="handleLetterClick(item)"
         @touchstart="handleTouchStart"
         @touchmove="handleTouchMove"
         @touchend="handleTouchEnd"
@@ -23,9 +23,7 @@
     },
     data () {
       return {
-        touchStatus: false,
-        startY: 0,
-        timer: null
+        touchState: false
       }
     },
     computed: {
@@ -37,32 +35,23 @@
         return letters
       }
     },
-    updated () {
-      this.startY = this.$refs['A'][0].offsetTop
-    },
     methods: {
-      handleLetterClick (e) {
-        this.$emit('change', e.target.innerText)
+      handleLetterClick (letter) {
+        this.$emit('change', letter)
       },
       handleTouchStart () {
-        this.touchStatus = true
+        this.touchState = true
       },
       handleTouchMove (e) {
-        if (this.touchStatus) {
-          if (this.timer) {
-            clearTimeout(this.timer)
-          }
-          this.timer = setTimeout(() => {
-            const touchY = e.touches[0].clientY - 79
-            const index = Math.floor((touchY - this.startY) / 20)
-            if (index >= 0 && index <= this.letters.length) {
-              this.$emit('change', this.letters[index])
-            }
-          })
+        if (this.touchState) {
+          const startY = this.$refs['A'][0].offsetTop
+          const touchY = e.touches[0].clientY - 79
+          const index = Math.floor((touchY - startY) / 20)
+          this.$emit('change', this.letters[index])
         }
       },
       handleTouchEnd () {
-        this.touchStatus = false
+        this.touchState = false
       }
     }
   }

@@ -5,6 +5,7 @@
         <div class="title">当前城市</div>
         <div class="button-list">
           <div class="button-wrapper">
+            <!--<div class="button">{{this.$store.state.city}}</div>-->
             <div class="button">{{this.currentCity}}</div>
           </div>
         </div>
@@ -29,8 +30,9 @@
             class="item-list"
             v-for="item in group"
             :key="item.id"
+            @click="handleCityClick(item.name)"
           >
-            <div class="item border-1px" @click="handleCityClick(item.name)">{{item.name}}</div>
+            <div class="item border-1px">{{item.name}}</div>
           </div>
         </div>
       </div>
@@ -44,7 +46,7 @@
 <script type="text/ecmascript-6">
   import Bscroll from 'better-scroll'
   import loading from 'components/city/loading/loading'
-  import { mapState, mapMutations } from 'vuex'
+  import { mapState } from 'vuex'
 
   export default {
     props: {
@@ -64,8 +66,7 @@
     watch: {
       letter () {
         if (this.letter) {
-          const element = this.$refs[this.letter][0]
-          this.scroll.scrollToElement(element, 300)
+          this.scroll.scrollToElement(this.$refs[this.letter][0], 300)
         }
       }
     },
@@ -76,12 +77,11 @@
     },
     methods: {
       handleCityClick (city) {
-        // this.$store.dispatch('changeCity', city)
-        // this.$store.commit('changeCity', city)
-        this.changeCity(city)
+        // 组件派发actions
+        this.$store.dispatch('changeCity', city)
+        // 编程式导航
         this.$router.push('/')
-      },
-      ...mapMutations(['changeCity'])
+      }
     },
     components: {
       loading
@@ -122,6 +122,7 @@
         line-height: .76rem
         padding-left: .2rem
         border-1px(#ccc)
+
   .loading-container
     position: absolute
     left: 50%

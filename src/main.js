@@ -5,6 +5,7 @@ import router from './router'
 import fastclick from 'fastclick'
 // 画廊部分
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+// 引入vuex
 import store from './store'
 
 import Vant from 'vant'

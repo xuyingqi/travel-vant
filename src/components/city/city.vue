@@ -40,7 +40,7 @@
             }
           })
       },
-      changeLetter (letter) {
+      changeLetter(letter) {
         this.letter = letter
       }
     },

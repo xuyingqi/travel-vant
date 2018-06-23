@@ -20,7 +20,8 @@
           class="search-item border-1px"
           @click="handleCityClick(item.name)"
         >
-          {{item.name}}</li>
+          {{item.name}}
+        </li>
         <li class="search-item" v-show="hasNoDatas">未找到匹配数据</li>
       </ul>
     </div>
@@ -33,7 +34,6 @@
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
   import loading from 'components/city/loading/loading'
-  import { mapMutations } from 'vuex'
 
   export default {
     props: {
@@ -84,11 +84,12 @@
     },
     methods: {
       handleCityClick(city) {
-        // this.$store.commit('changeCity', city)
-        this.changeCity(city)
+        // 组件派发actions
+        this.$store.dispatch('changeCity', city)
+        // 编程式导航
         this.$router.push('/')
-      },
-      ...mapMutations(['changeCity'])
+        this.keywords = ''
+      }
     },
     components: {
       loading
@@ -114,6 +115,7 @@
       text-align: center
       border-radius: .06rem
       color: #666
+
   .search-content
     z-index: 1
     overflow: hidden
@@ -129,6 +131,7 @@
       background: #fff
       color: #666
       border-1px(#ccc)
+
   .loading-content
     position: fixed
     left: 50%

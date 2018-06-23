@@ -19,8 +19,8 @@
   import recommend from 'components/home/recommend/recommend'
   import weekend from 'components/home/weekend/weekend'
   import axios from 'axios'
-  import { mapState } from 'vuex'
   import BScroll from 'better-scroll'
+  import { mapState } from 'vuex'
 
   export default {
     data () {
@@ -31,9 +31,6 @@
         weekendList: [],
         lastCity: ''
       }
-    },
-    computed: {
-      ...mapState(['city'])
     },
     mounted () {
       this.lastCity = this.city
@@ -46,6 +43,10 @@
         this.getHomeInfo()
       }
       this._initScroll()
+    },
+    computed: {
+      // 当前城市
+      ...mapState(['city'])
     },
     methods: {
       getHomeInfo () {
